@@ -20,4 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ImpressionsDetector"
-include(":app")
+include(":sample")
+include(":lib")
