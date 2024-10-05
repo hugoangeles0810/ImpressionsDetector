@@ -45,7 +45,7 @@ class DefaultVisibleCalculatorTest {
     }
 
     @Test
-    fun `given a partially target bounds should return expected percentage`() {
+    fun `given partially visible target bounds should return expected percentage`() {
         val percentage = calculator.visibleAreaPercentage(
             targetBounds = Rect(310f, 0f, 410f, 100f),
             containerBounds = containerBounds
