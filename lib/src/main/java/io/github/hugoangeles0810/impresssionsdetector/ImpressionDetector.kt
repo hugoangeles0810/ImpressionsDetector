@@ -4,7 +4,7 @@ import android.os.SystemClock
 import androidx.compose.ui.geometry.Rect
 import java.util.concurrent.ConcurrentHashMap
 
-private typealias Key = Any
+internal typealias ImpressionKey = Any
 private typealias Value = Pair<Long, ImpressionCallback>
 internal typealias ImpressionCallback = () -> Unit
 
@@ -14,7 +14,7 @@ class ImpressionDetector internal constructor(
     private val rule: ImpressionRule
 ) {
 
-    private val visibleItems: MutableMap<Key, Value> by lazy { ConcurrentHashMap() }
+    private val visibleItems: MutableMap<ImpressionKey, Value> by lazy { ConcurrentHashMap() }
 
     constructor(
         rule: ImpressionRule = ImpressionRule()
@@ -27,7 +27,7 @@ class ImpressionDetector internal constructor(
     internal fun onItemLayoutCoordinatesChange(
         targetBounds: Rect,
         containerBounds: Rect,
-        key: Key,
+        key: ImpressionKey,
         onImpression: ImpressionCallback
     ) {
 
@@ -39,11 +39,14 @@ class ImpressionDetector internal constructor(
         } else {
             sendImpressionIfDurationSufficient(key)
         }
+    }
 
+    internal fun onItemDisposed(key: ImpressionKey) {
+        sendImpressionIfDurationSufficient(key)
     }
 
     private fun sendImpressionIfDurationSufficient(
-        key: Key,
+        key: ImpressionKey,
         removeAfter: Boolean = true
     ) {
         visibleItems[key]?.let { (timeAdded, callback) ->
@@ -57,7 +60,7 @@ class ImpressionDetector internal constructor(
         }
     }
 
-    private fun MutableMap<Key, Value>.addIfNotExists(key: Key, value: Value) {
+    private fun MutableMap<ImpressionKey, Value>.addIfNotExists(key: ImpressionKey, value: Value) {
         if (containsKey(key).not()) {
             set(key, value)
         }

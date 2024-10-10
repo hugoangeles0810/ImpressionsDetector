@@ -1,4 +1,4 @@
-package io.github.hugoangeles0810.impresssionsdetector
+package io.github.hugoangeles0810.impresssionsdetector.util
 
 import kotlin.time.Duration
 
@@ -7,7 +7,7 @@ object FakeCurrentTime : () -> Long {
     private var time: Long = 0
 
     fun advanceTimeBy(duration: Duration) {
-        this.time += duration.inWholeMilliseconds
+        time += duration.inWholeMilliseconds
     }
 
     fun reset() {

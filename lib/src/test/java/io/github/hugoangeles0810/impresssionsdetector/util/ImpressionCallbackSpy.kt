@@ -1,4 +1,6 @@
-package io.github.hugoangeles0810.impresssionsdetector
+package io.github.hugoangeles0810.impresssionsdetector.util
+
+import io.github.hugoangeles0810.impresssionsdetector.ImpressionCallback
 
 class ImpressionCallbackSpy : ImpressionCallback {
 
