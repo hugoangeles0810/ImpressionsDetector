@@ -72,4 +72,9 @@ private class ImpressionNode(
             impressionDetector.onItemDisposed(key)
         }
     }
+
+    override fun onDetach() {
+        impressionDetector.onItemDisposed(key)
+        super.onDetach()
+    }
 }
